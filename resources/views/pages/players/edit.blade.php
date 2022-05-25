@@ -38,6 +38,7 @@
         'title'=>'I am retired',
         'name'=>'retired',
         'value'=>1,
+        'valueActual' => $player->retired,
         'type'=>'radio',
         'require'=>0,
     ),
@@ -45,6 +46,7 @@
         'title'=>'I am not retired',
         'name'=>'retired',
         'value'=>0,
+        'valueActual' => $player->retired,
         'type'=>'radio',
         'require'=>0,
     )

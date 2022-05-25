@@ -19,7 +19,9 @@
                    @if($array['require']==1)
                    required
                    @endif
-
+                       @if($array['type'] == 'radio' && $array['valueActual'] == $array['value'])
+                        checked
+                       @endif
                    aria-describedby="nameHelp">@if($array['type']=='textarea'){{($array['value'])}}
             </textarea>
             @endif
