@@ -12,9 +12,20 @@ class PlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $player = Player::orderBy('id','asc')->paginate(10);
+        if($request->search !="") {
+            $search = $request->input('search');
+
+            $player = Player::query()
+                ->where('name', 'LIKE', "{$search}%")
+                ->orderBy('id', 'asc')->paginate(10);
+        }else{
+        $player = Player::query()
+            ->orderBy('id', 'asc')->paginate(10);
+    }
+
+
         return view('pages.players.index',['player'=>$player]);
     }
 
@@ -98,6 +109,17 @@ class PlayerController extends Controller
      */
     public function destroy(Player $player)
     {
-        //
+        try {
+            $player = Player::findOrFail($player->id);
+            $player->delete();
+            return redirect('players')->with('status','Item deleted successfully!');;
+        } catch(ModelNotFoundException $e){
+            return redirect('players')->with('status','Item not deleted successfully!');;
+        }
+    }
+    public function deleteall()
+    {
+        Player::truncate();
+        return redirect('players')->with('status','OH NOOO');;
     }
 }

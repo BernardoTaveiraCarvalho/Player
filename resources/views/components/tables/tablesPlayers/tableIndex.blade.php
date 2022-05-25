@@ -8,6 +8,11 @@
     </div>
 @endif
 {{$object->links()}}
+<form action="{{url('/players/deleteall')}}" method="POST">
+    @csrf
+    @method('DELETE')
+    <td>  <button type="submit" class="btn btn-danger">Delete All</button></td>
+</form>
 <table class="table table-dark">
     <thead>
     <tr>
@@ -18,6 +23,7 @@
         <th scope="col">Created_at</th>
         <th scope="col">updated_at</th>
         <th scope="col">Show</th>
+        <th scope="col">Edit</th>
         <th scope="col">Delete</th>
     </tr>
     </thead>
@@ -37,7 +43,12 @@
             <td>{{$obj->created_at}}</td>
             <td>{{$obj->updated_at}}</td>
             <td><a class="btn btn-success" href="{{url('players/'.$obj->id)}}" role="button">Show</a></td>
-          <td>  <button type="button" class="btn btn-danger">Delete</button></td>
+            <td><a class="btn btn-primary" href="{{url('players/'.$obj->id.'/edit')}}" role="button">Edit</a></td>
+            <form action="{{url('players/' . $obj->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+          <td>  <button type="submit" class="btn btn-danger">Delete</button></td>
+            </form>
         </tr>
     @endforeach
 

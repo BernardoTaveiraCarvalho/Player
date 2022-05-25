@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::delete('/players/deleteall','PlayerController@deleteall');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/players','PlayerController@index');
 Route::get('/players/create', 'PlayerController@create');
@@ -26,3 +27,5 @@ Route::get('/players/{player}','PlayerController@show');
 Route::get('/players/{player}/edit','PlayerController@edit');
 Route::post('/players', 'PlayerController@store');
 Route::put('/players/{player}', 'PlayerController@update');
+Route::delete('/players/{player}','PlayerController@destroy');
+
